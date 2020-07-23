@@ -9,7 +9,7 @@ header{
 
 .reddit-text{
   font-weight: 700;
-  height: 500px;
+  height: 50px;
   width: 50px;
 }
 .logo{
@@ -18,9 +18,9 @@ header{
 
 .login, .signup{
   background-color: transparent;
-  border-color: #00723D;
-  color: #00723D;
-  fill: #00723D;
+  border-color: #0079D3;
+  color: #0079D3;
+  fill: #0079D3;
   border: 1px solid;
   border-radius: 4px;
   box-sizing: border-box;
