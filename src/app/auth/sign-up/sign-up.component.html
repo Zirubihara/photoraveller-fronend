@@ -7,14 +7,14 @@
           <h4>Register</h4>
         </div>
         <div class="card-body">
-          <form [formGroup]="signupForm">
+          <form [formGroup]="signUpForm" (ngSubmit)="signup()">
             <div class="form-group row">
               <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
                 Address</label>
               <div class="col-md-6">
                 <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
                        autofocus>
-                <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
+                <span *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">
                                     Please provide a valid email
                                 </span>
               </div>
@@ -24,7 +24,7 @@
               <label class="col-md-4 col-form-label text-md-right">User Name</label>
               <div class="col-md-6">
                 <input type="text" [formControlName]="'username'"class="form-control" required autofocus>
-                <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">
+                <span *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched">
                                     Please provide a valid username
                                 </span>
               </div>
@@ -34,7 +34,7 @@
               <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
               <div class="col-md-6">
                 <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" required>
-                <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">
+                <span *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched">
                                     Please provide a valid Password
                                 </span>
               </div>

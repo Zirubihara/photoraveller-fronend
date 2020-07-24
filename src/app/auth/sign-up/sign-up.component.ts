@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SignUpRequestPayload} from './SignUpRequestPayload';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { SignUpRequestPayload } from './SignUpRequestPayload';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,23 +11,12 @@ import {SignUpRequestPayload} from './SignUpRequestPayload';
 export class SignUpComponent implements OnInit {
 
   signUpRequestPayload: SignUpRequestPayload;
-  signupForm: FormGroup;
+  signUpForm: FormGroup;
 
-  constructor() {
-    // this.signupForm = new FormGroup({
-    //   username: new FormControl('', Validators.required),
-    //   email: new FormControl('', [Validators.required, Validators.email]),
-    //   password: new FormControl('', Validators.required)
-    // });
-    this.signUpRequestPayload = {
-      username: '',
-      email: '',
-      password: ''
-    };
-  }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): any {
-    this.signupForm = new FormGroup({
+    this.signUpForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
@@ -34,9 +24,15 @@ export class SignUpComponent implements OnInit {
   }
 
   signup(): any {
-    this.signUpRequestPayload.username = this.signupForm.get('username').value;
-    this.signUpRequestPayload.email = this.signupForm.get('email').value;
-    this.signUpRequestPayload.password = this.signupForm.get('password').value;
+    this.signUpRequestPayload.username = this.signUpForm.get('username').value;
+    this.signUpRequestPayload.email = this.signUpForm.get('email').value;
+    this.signUpRequestPayload.password = this.signUpForm.get('password').value;
+
+    this.authService.signup(this.signUpRequestPayload).subscribe(() => {
+      console.log('Signup succesful');
+    }, () => {
+      console.log('fail');
+    });
 
   }
 
