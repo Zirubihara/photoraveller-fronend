@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { SignUpRequestPayload } from './SignUpRequestPayload';
+import { SignUpRequestPayload} from './SignUpRequestPayload';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -13,7 +13,13 @@ export class SignUpComponent implements OnInit {
   signUpRequestPayload: SignUpRequestPayload;
   signUpForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    this.signUpRequestPayload = {
+      username: '',
+      email: '',
+      password: ''
+    };
+  }
 
   ngOnInit(): any {
     this.signUpForm = new FormGroup({
