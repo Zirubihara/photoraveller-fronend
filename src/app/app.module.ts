@@ -1,30 +1,69 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { HttpClientModule } from '@angular/common/http';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { ReactiveFormsModule} from '@angular/forms';
-import { LoginComponent } from './auth/login/login.component';
-import { NgxWebstorageModule} from 'ngx-webstorage';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {SignUpComponent} from './auth/sign-up/sign-up.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './auth/login/login.component';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import {TokenInterceptor} from './token-interceptor';
+import {HomeComponent} from './home/home.component';
+import {PostTitleComponent} from './shared/post-title/post-title.component';
+import {SideBarComponent} from './shared/side-bar/side-bar.component';
+import {PhotosSideBarComponent} from './shared/photos-side-bar/photos-side-bar.component';
+import {VoteButtonComponent} from './shared/vote-button/vote-button.component';
+import {ListPhotosComponent} from './photos/list-photos/list-photos.component';
+import {CreatePhotosComponent} from './photos/create-photos/create-photos.component';
+import {CreatePostComponent} from './post/create-post/create-post.component';
+import {ViewPostComponent} from './post/view-post/view-post.component';
+import {UserProfileComponent} from './auth/user-profile/user-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    PostTitleComponent,
+    SideBarComponent,
+    PhotosSideBarComponent,
+    VoteButtonComponent,
+    ListPhotosComponent,
+    CreatePhotosComponent,
+    CreatePostComponent,
+    ViewPostComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxWebstorageModule.forRoot()
+    NgxWebstorageModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    FontAwesomeModule,
+    EditorModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

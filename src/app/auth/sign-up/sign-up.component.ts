@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { SignUpRequestPayload} from './SignUpRequestPayload';
-import { AuthService } from '../shared/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {SignUpRequestPayload} from './SignUpRequestPayload';
+import {AuthService} from '../shared/auth.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +15,7 @@ export class SignUpComponent implements OnInit {
   signUpRequestPayload: SignUpRequestPayload;
   signUpForm: FormGroup;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
     this.signUpRequestPayload = {
       username: '',
       email: '',
@@ -35,9 +37,9 @@ export class SignUpComponent implements OnInit {
     this.signUpRequestPayload.password = this.signUpForm.get('password').value;
 
     this.authService.signup(this.signUpRequestPayload).subscribe(() => {
-      console.log('Signup succesful');
+      this.router.navigate(['/login'], {queryParams: {registered: 'true'}});
     }, () => {
-      console.log('fail');
+      this.toastr.error('Registration Failed! Please try again');
     });
 
   }
