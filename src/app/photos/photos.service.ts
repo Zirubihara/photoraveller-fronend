@@ -10,11 +10,11 @@ export class PhotosService {
   constructor(private http: HttpClient) { }
 
   getAllPhotos(): Observable<Array<PhotosModel>> {
-    return this.http.get<Array<PhotosModel>>('http://localhost:8080/api/subreddit');
+    return this.http.get<Array<PhotosModel>>('http://localhost:8080/api/photos');
   }
 
   createPhotos(photosModel: PhotosModel): Observable<PhotosModel> {
-    return this.http.post<PhotosModel>('http://localhost:8080/api/subreddit', photosModel);
+    return this.http.post<PhotosModel>('http://localhost:8080/api/photos', photosModel);
   }
 
 }

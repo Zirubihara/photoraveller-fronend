@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'view-post/:id', component: ViewPostComponent},
+  { path: 'create-photos', component: CreatePhotosComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
